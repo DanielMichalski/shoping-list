@@ -10,26 +10,26 @@ import pl.dmichalski.shoping_list.database.exceptions.OperationFailedException;
 import pl.dmichalski.shoping_list.database.exceptions.RecordNotFoundException;
 import pl.dmichalski.shoping_list.database.utils.ListContentValuesBuilder;
 import pl.dmichalski.shoping_list.database.utils.ListUtilities;
-import pl.dmichalski.shoping_list.database.utils.tables_headers.ListaZakupowTableHeaders;
+import pl.dmichalski.shoping_list.database.utils.tables_headers.ShopingListTableHeaders;
 import pl.dmichalski.shoping_list.shoping.ShopingList;
 
 import java.util.List;
 
-public class ListaZakupowDao {
+public class ShopingListDao {
 
-    private final String tableName = ListaZakupowTableHeaders.TABLE_NAME;
+    private final String tableName = ShopingListTableHeaders.TABLE_NAME;
 
     private DatabaseAdapter databaseAdapter;
 
     private SQLiteDatabase database;
 
 
-    public ListaZakupowDao(Context context) {
+    public ShopingListDao(Context context) {
         databaseAdapter = DatabaseAdapter.getInstance();
         database = databaseAdapter.open(context);
     }
 
-    public ListaZakupowDao(DBHelper dbHelper) {
+    public ShopingListDao(DBHelper dbHelper) {
         databaseAdapter = DatabaseAdapter.getInstance();
         database = databaseAdapter.open(dbHelper);
     }
@@ -50,7 +50,7 @@ public class ListaZakupowDao {
     }
 
     public ShopingList update(ShopingList shopingList) {
-        String where = ListaZakupowTableHeaders.LIST_ID + "=" + shopingList.getId();
+        String where = ShopingListTableHeaders.LIST_ID + "=" + shopingList.getId();
         ContentValues updateTaskValues = ListContentValuesBuilder.createContentValuesByList(shopingList);
         long res = database.update(tableName, updateTaskValues, where, null);
         validDBOperation(res);
@@ -59,7 +59,7 @@ public class ListaZakupowDao {
 
 
     public int delete(ShopingList shopingList) {
-        String where = ListaZakupowTableHeaders.LIST_ID + "=" + shopingList.getId();
+        String where = ShopingListTableHeaders.LIST_ID + "=" + shopingList.getId();
         int res = database.delete(tableName, where, null);
         validDBOperation(res);
         return res;

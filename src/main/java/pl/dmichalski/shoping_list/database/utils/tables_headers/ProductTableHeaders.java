@@ -1,6 +1,6 @@
 package pl.dmichalski.shoping_list.database.utils.tables_headers;
 
-public class ProduktyTableHeaders {
+public class ProductTableHeaders {
     public static final String TABLE_NAME = "produkty";
 
     public static final String PRODUCT_ID = "id_produktu";

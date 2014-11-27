@@ -5,8 +5,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 import pl.dmichalski.shoping_list.database.utils.query.DatabaseQueryStrings;
-import pl.dmichalski.shoping_list.database.utils.tables_headers.ListaZakupowTableHeaders;
-import pl.dmichalski.shoping_list.database.utils.tables_headers.ProduktyTableHeaders;
+import pl.dmichalski.shoping_list.database.utils.tables_headers.ShopingListTableHeaders;
+import pl.dmichalski.shoping_list.database.utils.tables_headers.ProductTableHeaders;
 
 import java.util.Locale;
 
@@ -53,8 +53,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL(DatabaseQueryStrings.DROP_LIST_TABLE);
         db.execSQL(DatabaseQueryStrings.DROP_PRODUCTS_TABLE);
-        Log.i(DEBUG_TAG, "Usuniecie tabeli: " + ListaZakupowTableHeaders.TABLE_NAME);
-        Log.i(DEBUG_TAG, "Usuniecie tabeli: " + ProduktyTableHeaders.TABLE_NAME);
+        Log.i(DEBUG_TAG, "Usuniecie tabeli: " + ShopingListTableHeaders.TABLE_NAME);
+        Log.i(DEBUG_TAG, "Usuniecie tabeli: " + ProductTableHeaders.TABLE_NAME);
         Log.d(DEBUG_TAG, "Aktualizacja bazy danych z ver." + oldVersion + " do ver." + newVersion);
         onCreate(db);
     }

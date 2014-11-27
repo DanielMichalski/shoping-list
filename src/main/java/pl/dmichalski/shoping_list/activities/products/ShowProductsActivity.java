@@ -11,7 +11,7 @@ import android.widget.*;
 import com.example.lista_zakupow.R;
 import pl.dmichalski.shoping_list.activities.MainActivity;
 import pl.dmichalski.shoping_list.adapters.SpecialAdapter;
-import pl.dmichalski.shoping_list.database.dao.ProduktyDao;
+import pl.dmichalski.shoping_list.database.dao.ProductDao;
 import pl.dmichalski.shoping_list.shoping.Product;
 import pl.dmichalski.shoping_list.shoping.ShopingList;
 
@@ -21,7 +21,7 @@ public class ShowProductsActivity extends Activity {
     private static final int CONFIRM_REMOVE_LIST = 1;
 
     SpecialAdapter<Product> adapter;
-    ProduktyDao produktyDao;
+    ProductDao productDao;
 
     private ListView list;
 
@@ -50,8 +50,8 @@ public class ShowProductsActivity extends Activity {
         list = (ListView) findViewById(R.id.list);
         lista = (ShopingList) getIntent().getExtras().get("lista");
 
-        produktyDao = new ProduktyDao(this, lista);
-        List<Product> listaProduktow = produktyDao.getAllProductsByShopList();
+        productDao = new ProductDao(this, lista);
+        List<Product> listaProduktow = productDao.getAllProductsByShopList();
 
         adapter = new SpecialAdapter<Product>(this, listaProduktow);
         list.setAdapter(adapter);
@@ -127,7 +127,7 @@ public class ShowProductsActivity extends Activity {
                                 adapter.removeItem(adapter.getSelectedItemPos());
                                 adapter.unselectAll();
                                 list.setAdapter(adapter);
-                                produktyDao.delete(selectedProduct);
+                                productDao.delete(selectedProduct);
                                 Toast.makeText(getApplicationContext(), "Usunięto produkt: " + selectedProduct.getName(), Toast.LENGTH_LONG).show();
                                 refreshListView();
                                 disableBtns();
@@ -208,7 +208,7 @@ public class ShowProductsActivity extends Activity {
             adapter.removeItem(adapter.getSelectedItemPos());
             adapter.unselectAll();
             list.setAdapter(adapter);
-            produktyDao.delete(selectedProduct);
+            productDao.delete(selectedProduct);
             Toast.makeText(getApplicationContext(), "Usunięto produkt: " + selectedProduct.getName(), Toast.LENGTH_LONG).show();
             refreshListView();
             disableBtns();

@@ -1,8 +1,8 @@
 package pl.dmichalski.shoping_list.database.utils;
 
 import android.database.Cursor;
-import pl.dmichalski.shoping_list.database.utils.tables_headers.ListaZakupowTableHeaders;
-import pl.dmichalski.shoping_list.database.utils.tables_headers.ProduktyTableHeaders;
+import pl.dmichalski.shoping_list.database.utils.tables_headers.ShopingListTableHeaders;
+import pl.dmichalski.shoping_list.database.utils.tables_headers.ProductTableHeaders;
 import pl.dmichalski.shoping_list.shoping.Product;
 import pl.dmichalski.shoping_list.shoping.ShopingList;
 import pl.dmichalski.shoping_list.shoping.Unit;
@@ -34,17 +34,17 @@ public class ListUtilities {
     }
 
     private static ShopingList createListBy(Cursor c) {
-        int listId = c.getInt(c.getColumnIndex(ListaZakupowTableHeaders.LIST_ID));
-        String listName = c.getString(c.getColumnIndex(ListaZakupowTableHeaders.LIST_NAME));
+        int listId = c.getInt(c.getColumnIndex(ShopingListTableHeaders.LIST_ID));
+        String listName = c.getString(c.getColumnIndex(ShopingListTableHeaders.LIST_NAME));
 
         return new ShopingList(listId, listName);
     }
 
     private static Product createProductBy(Cursor c) {
-        int productId = c.getInt(c.getColumnIndex(ProduktyTableHeaders.PRODUCT_ID));
-        String productName = c.getString(c.getColumnIndex(ProduktyTableHeaders.PRODUCT_NAME));
-        int howMany = c.getInt(c.getColumnIndex(ProduktyTableHeaders.HOW_MANY));
-        String unit = c.getString(c.getColumnIndex(ProduktyTableHeaders.UNIT));
+        int productId = c.getInt(c.getColumnIndex(ProductTableHeaders.PRODUCT_ID));
+        String productName = c.getString(c.getColumnIndex(ProductTableHeaders.PRODUCT_NAME));
+        int howMany = c.getInt(c.getColumnIndex(ProductTableHeaders.HOW_MANY));
+        String unit = c.getString(c.getColumnIndex(ProductTableHeaders.UNIT));
         Unit jednostka = Unit.valueOf(unit);
 
         return new Product(productId, productName, howMany, jednostka);

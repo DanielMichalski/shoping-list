@@ -8,7 +8,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 import com.example.lista_zakupow.R;
 import pl.dmichalski.shoping_list.adapters.SpecialAdapter;
-import pl.dmichalski.shoping_list.database.dao.ListaZakupowDao;
+import pl.dmichalski.shoping_list.database.dao.ShopingListDao;
 import pl.dmichalski.shoping_list.shoping.ShopingList;
 
 public class AddAndEditDialog extends Dialog {
@@ -17,7 +17,7 @@ public class AddAndEditDialog extends Dialog {
     private int chose;
     private ShopingList selectedItem;
 
-    private ListaZakupowDao listaZakupowDao;
+    private ShopingListDao shopingListDao;
 
     private EditText listNameEitText;
 
@@ -29,7 +29,7 @@ public class AddAndEditDialog extends Dialog {
 
         this.selectedItem = selectedItem;
 
-        listaZakupowDao = new ListaZakupowDao(context);
+        shopingListDao = new ShopingListDao(context);
 
         this.adapter = adapter;
 
@@ -63,7 +63,7 @@ public class AddAndEditDialog extends Dialog {
             switch (chose) {
                 case ADD:
                     ShopingList shopingList = new ShopingList(listNameEitText.getText().toString());
-                    listaZakupowDao.save(shopingList);
+                    shopingListDao.save(shopingList);
                     adapter.addItem(shopingList);
                     listNameEitText.setText("");
                     dismiss();

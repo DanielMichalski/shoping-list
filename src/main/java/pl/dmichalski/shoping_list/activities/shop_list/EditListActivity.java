@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import com.example.lista_zakupow.R;
 import pl.dmichalski.shoping_list.activities.MainActivity;
-import pl.dmichalski.shoping_list.database.dao.ListaZakupowDao;
+import pl.dmichalski.shoping_list.database.dao.ShopingListDao;
 import pl.dmichalski.shoping_list.shoping.ShopingList;
 
 public class EditListActivity extends Activity {
@@ -19,7 +19,7 @@ public class EditListActivity extends Activity {
 
     private EditText editTextTaskName;
 
-    private ListaZakupowDao listaZakupowDao;
+    private ShopingListDao shopingListDao;
     ShopingList shopingList;
 
     @Override
@@ -29,7 +29,7 @@ public class EditListActivity extends Activity {
 
         shopingList = (ShopingList) getIntent().getExtras().get("lista");
 
-        listaZakupowDao = new ListaZakupowDao(this);
+        shopingListDao = new ShopingListDao(this);
         editTextTaskName = (EditText) findViewById(R.id.listNameEditText);
         editTextTaskName.setText(shopingList.getNameToView());
 
@@ -70,7 +70,7 @@ public class EditListActivity extends Activity {
                 showDialog(NO_TASK_TAME_DIALOG);
             else {
                 shopingList.setName(editTextTaskName.getText().toString());
-                listaZakupowDao.update(shopingList);
+                shopingListDao.update(shopingList);
                 wrocDoGlownejAkt();
             }
         }

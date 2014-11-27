@@ -10,14 +10,14 @@ import pl.dmichalski.shoping_list.database.exceptions.OperationFailedException;
 import pl.dmichalski.shoping_list.database.exceptions.RecordNotFoundException;
 import pl.dmichalski.shoping_list.database.utils.ListUtilities;
 import pl.dmichalski.shoping_list.database.utils.ProductContentValuesBuilder;
-import pl.dmichalski.shoping_list.database.utils.tables_headers.ProduktyTableHeaders;
+import pl.dmichalski.shoping_list.database.utils.tables_headers.ProductTableHeaders;
 import pl.dmichalski.shoping_list.shoping.Product;
 import pl.dmichalski.shoping_list.shoping.ShopingList;
 
 import java.util.List;
 
-public class ProduktyDao {
-    private final String tableName = ProduktyTableHeaders.TABLE_NAME;
+public class ProductDao {
+    private final String tableName = ProductTableHeaders.TABLE_NAME;
 
     private DatabaseAdapter databaseAdapter;
 
@@ -25,13 +25,13 @@ public class ProduktyDao {
 
     private ShopingList lista;
 
-    public ProduktyDao(Context context, ShopingList shopingList) {
+    public ProductDao(Context context, ShopingList shopingList) {
         databaseAdapter = DatabaseAdapter.getInstance();
         database = databaseAdapter.open(context);
         this.lista = shopingList;
     }
 
-    public ProduktyDao(DBHelper dbHelper, ShopingList shopingList) {
+    public ProductDao(DBHelper dbHelper, ShopingList shopingList) {
         databaseAdapter = DatabaseAdapter.getInstance();
         database = databaseAdapter.open(dbHelper);
         this.lista = shopingList;
@@ -55,7 +55,7 @@ public class ProduktyDao {
     }
 
     public Product update(Product product) {
-        String where = ProduktyTableHeaders.PRODUCT_ID + "=" + product.getId();
+        String where = ProductTableHeaders.PRODUCT_ID + "=" + product.getId();
         ContentValues updateProductValues = ProductContentValuesBuilder.createContentValuesByProduct(product, lista.getId());
         long res = database.update(tableName, updateProductValues, where, null);
         validDBOperation(res);
@@ -64,7 +64,7 @@ public class ProduktyDao {
 
 
     public int delete(Product product) {
-        String where = ProduktyTableHeaders.PRODUCT_ID + "=" + product.getId();
+        String where = ProductTableHeaders.PRODUCT_ID + "=" + product.getId();
         int res = database.delete(tableName, where, null);
         validDBOperation(res);
         return res;

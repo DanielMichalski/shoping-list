@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import com.example.lista_zakupow.R;
-import pl.dmichalski.shoping_list.database.dao.ProduktyDao;
+import pl.dmichalski.shoping_list.database.dao.ProductDao;
 import pl.dmichalski.shoping_list.shoping.Product;
 import pl.dmichalski.shoping_list.shoping.ShopingList;
 import pl.dmichalski.shoping_list.shoping.Unit;
@@ -20,7 +20,7 @@ import pl.dmichalski.shoping_list.shoping.Unit;
 public class AddAndEditProductActivity extends Activity {
     public static final int NO_PRODUCT_NAME_DIALOG = 1;
 
-    private ProduktyDao produktyDao;
+    private ProductDao productDao;
 
     private ArrayAdapter<CharSequence> iloscAdapter;
     private ArrayAdapter<CharSequence> jednostkiAdapter;
@@ -45,7 +45,7 @@ public class AddAndEditProductActivity extends Activity {
         product = (Product) getIntent().getExtras().get("produkt");
         shopingList = (ShopingList) getIntent().getExtras().get("lista");
 
-        produktyDao = new ProduktyDao(getApplicationContext(), shopingList);
+        productDao = new ProductDao(getApplicationContext(), shopingList);
 
         productNameEditText = (EditText) findViewById(R.id.productNameEditText);
 
@@ -89,11 +89,11 @@ public class AddAndEditProductActivity extends Activity {
             } else {
                 if (czyEdit) {
                     product = getProductFromFields();
-                    produktyDao.update(product);
+                    productDao.update(product);
                     backToPreviousActivity();
                 } else {
                     Product product1 = getProductFromFields();
-                    produktyDao.save(product1);
+                    productDao.save(product1);
                     backToPreviousActivity();
                 }
             }

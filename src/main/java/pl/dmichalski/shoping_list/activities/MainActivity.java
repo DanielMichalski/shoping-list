@@ -13,7 +13,7 @@ import pl.dmichalski.shoping_list.activities.products.ShowProductsActivity;
 import pl.dmichalski.shoping_list.activities.shop_list.AddListActivity;
 import pl.dmichalski.shoping_list.activities.shop_list.EditListActivity;
 import pl.dmichalski.shoping_list.adapters.SpecialAdapter;
-import pl.dmichalski.shoping_list.database.dao.ListaZakupowDao;
+import pl.dmichalski.shoping_list.database.dao.ShopingListDao;
 import pl.dmichalski.shoping_list.shoping.ShopingList;
 
 import java.util.List;
@@ -26,7 +26,7 @@ public class MainActivity extends Activity {
 
     TextView howMayTasks;
     SpecialAdapter<ShopingList> adapter;
-    ListaZakupowDao listaZakupowDao;
+    ShopingListDao shopingListDao;
     private ListView list;
     private Button buttonEdit;
     private Button buttonDelete;
@@ -68,8 +68,8 @@ public class MainActivity extends Activity {
 
         howMayTasks = (TextView) findViewById(R.id.textViewHowMayTasks);
 
-        listaZakupowDao = new ListaZakupowDao(this);
-        List<ShopingList> shopingList = listaZakupowDao.getAllListaZakupow();
+        shopingListDao = new ShopingListDao(this);
+        List<ShopingList> shopingList = shopingListDao.getAllListaZakupow();
 
         adapter = new SpecialAdapter<ShopingList>(this, shopingList);
         list.setAdapter(adapter);
@@ -80,7 +80,7 @@ public class MainActivity extends Activity {
 
         list.setOnItemClickListener(new SluchaczKliknieciaNaListe());
 
-        listaZakupowDao = new ListaZakupowDao(this);
+        shopingListDao = new ShopingListDao(this);
 
     }
 
@@ -132,7 +132,7 @@ public class MainActivity extends Activity {
                                 adapter.removeItem(adapter.getSelectedItemPos());
                                 adapter.unselectAll();
                                 list.setAdapter(adapter);
-                                listaZakupowDao.delete(selectedItem);
+                                shopingListDao.delete(selectedItem);
                                 Toast.makeText(getApplicationContext(), "Usunięto listę: " + selectedItem.getName(), Toast.LENGTH_LONG).show();
                                 refreshListView();
                                 disableBtns();
@@ -206,7 +206,7 @@ public class MainActivity extends Activity {
             adapter.removeItem(adapter.getSelectedItemPos());
             adapter.unselectAll();
             list.setAdapter(adapter);
-            listaZakupowDao.delete(selectedItem);
+            shopingListDao.delete(selectedItem);
             Toast.makeText(getApplicationContext(), "Usunięto listę: " + selectedItem.getName(), Toast.LENGTH_LONG).show();
             refreshListView();
             disableBtns();
